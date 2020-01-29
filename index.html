@@ -27,6 +27,41 @@
     <div style="position: absolute; margin-left: 480px; margin-top: 90px;">
         <img src="https://raw.githubusercontent.com/LysergixSound/TSGBloodmap/master/img/torch1.gif" />
     </div>
+    <b>
+      <div id="lastFollowers" style="font-size: 16px; padding-left: 60px; padding-top: 10px; position: absolute; margin-top: 400px; background-color: #FF0000; width: 500px; height: 280px; background: url('https://raw.githubusercontent.com/LysergixSound/TSGBloodmap/master/img/stone.png') no-repeat; background-size: 500px 280px;">
+        <h2>VIRGIN BLOOD</h2>
+      </div>
+    </b>
 
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"></script>
+
+  <script>
+    $.ajax({
+        url: "https://api.twitch.tv/kraken/channels/249820319/follows?limit=5",
+        type: 'GET',
+        dataType: 'json',
+        contentType: 'application/json',
+        headers: {
+          'Accept': 'application/vnd.twitchtv.v5+json',
+          'Client-ID': 'lyph2sgrvpz83iw9pl8w2l3defvywf'
+        },
+        success: function(data) {
+          var arrayLength = data.follows.length;
+          console.log(data);
+          for (var i = 0; i < arrayLength; i++) {
+              var paraUser = document.createElement("p");
+              var node = document.createTextNode(data.follows[i].user.display_name + " [Joined@ " + data.follows[i].created_at + "]");
+              paraUser.appendChild(node);
+
+              var element = document.getElementById("lastFollowers");
+              element.appendChild(paraUser);
+          }
+        }
+      });
+  </script>
 </body>
-</html >
+</html>
